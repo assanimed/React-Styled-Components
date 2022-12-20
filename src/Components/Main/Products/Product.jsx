@@ -10,7 +10,9 @@ const ProductCart = styled.div`
   position: relative;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0px 2px 4px -3px #040404;
+  box-shadow: 2px 3px 4px -3px #040404;
+  padding: 20px;
+  border-radius: 5px;
   > div {
     flex: 1;
   }
@@ -18,12 +20,14 @@ const ProductCart = styled.div`
 
 const ProductImage = styled.div`
   width: 100%;
+  overflow: hidden;
+  max-height: 200px;
 `;
 
-const Image = styled.img.attrs({
-  src: placehoder,
-  alt: "product image placeholder",
-})`
+const Image = styled.img.attrs(props => ({
+  src: (props.thumbnail ?? placehoder),
+  alt: "Product Picture",
+}))`
   width: 100%;
 `;
 
@@ -79,16 +83,16 @@ const Over = styled.del`
 
 // const
 
-const Product = ({ price, discount }) => {
+const Product = ({thumbnail, price, discount, title}) => {
   const discountValue = (price * discount) / 100;
   const newPrice = price - discountValue;
   return (
     <ProductCart>
       <ProductImage>
-        <Image />
+        <Image thumbnail={thumbnail} />
       </ProductImage>
       <ProductInfo>
-        <ProductTitle>Fancy Product</ProductTitle>
+        <ProductTitle>{title}</ProductTitle>
         <ProductPrice>
           {discount ? (
             <>

@@ -1,6 +1,8 @@
-import React from "react";
+import {useContext} from "react";
 import styled from "styled-components";
 import Product from "./Product";
+import Context from "../../../Context/ProductContext";
+
 
 const ProductGrid = styled.div`
   padding: 30px 10px;
@@ -11,13 +13,19 @@ const ProductGrid = styled.div`
 `;
 
 const Products = () => {
+
+  const {products} = useContext(Context);
+
+
+
   return (
+    <>
     <ProductGrid>
-      <Product discount={null} price={80} />
-      <Product discount={10} price={20} />
-      <Product discount={50} price={50} />
-      <Product discount={null} price={40} />
+      {
+        products.map(product => <Product {...product} />)
+      }
     </ProductGrid>
+    </>
   );
 };
 
